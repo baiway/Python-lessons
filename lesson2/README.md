@@ -10,7 +10,7 @@ We can use the assignment operator `=` to store values in variables. For example
 9
 ```
 
-**Task 1:** Determine the area of a triangle with a base length of 6 cm and a height of 9 cm. Store the lengths as variables `base` and `height` then use the formula `area = 0.5 * base * height` to calculate the area. Print the result to the screen using `print(A)`.
+**Task 1:** Determine the area of a triangle with a base length of 6 cm and a height of 9 cm. Store the lengths as variables `base` and `height` then use the formula `area = 0.5 * base * height` to calculate the area. Print the result to the screen using `print(area)`.
 
 **Task 2:** The surface area $s$ of an octohedron with side length $a$ is $s = 2a^2 \sqrt{3}$. Determine the surface area of an octohedron with side length 8 cm.
 
