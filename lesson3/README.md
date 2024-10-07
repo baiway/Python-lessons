@@ -1,5 +1,5 @@
 # Conditional logic
-To write responsive programs, we need to use conditional logic. The general structure of conditional statements in Python is as follows:
+To write responsive programs, we need to use conditional logic. See the example below.
 ```python
 x = 5
 y = 3
@@ -21,7 +21,7 @@ if name not in plastics:
     print("You can't sit with us")
 ```
 
-**Task 1:** write a simple Python program that generates two random numbers `num1` and `num2`, asks the user to do something with them (e.g. add them together, or multiply them), then checks whether the user got the answer right. Use the code below to start you off.
+**Task 1:** write a simple Python program that generates two random numbers `num1` and `num2`, asks the user to do something with them (e.g. add them together, or multiply them -- you decide), then checks whether the user got the answer right. Use the code below to start you off.
 ```python
 import random
 

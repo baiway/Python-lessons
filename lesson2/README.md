@@ -12,10 +12,10 @@ We can use the assignment operator `=` to store values in variables. For example
 
 **Task 1:** Determine the area of a triangle with a base length of 6 cm and a height of 9 cm. Store the lengths as variables `base` and `height` then use the formula `area = 0.5 * base * height` to calculate the area. Print the result to the screen using `print(area)`.
 
-**Task 2:** The surface area $s$ of an octohedron with side length $a$ is $s = 2a^2 \sqrt{3}$. Determine the surface area of an octohedron with side length 8 cm.
+**Task 2:** The surface area $s$ of an octohedron with side length $a$ is $s = 2a^2 \sqrt{3}$. Use this formula to determine the surface area of an octohedron with side length 8 cm. *Hint: you can write powers (e.g. $7^2$ in Python using the `**` operator, e.g. `7**2`). You can also use the `math` library to do square roots, e.g. `math.sqrt(64)`.*
 
 ## Data types
-Some of the basic data types in Python at listed below. There are more types (for a complete list, click [here](https://docs.python.org/3/library/stdtypes.html)), and it's even possible to define your own, but these will be enough for our purposes for a while.
+Some of the basic data types in Python at listed below. There are more types (for a complete list, click [here](https://docs.python.org/3/library/stdtypes.html)), and it's even possible to define your own, but these will be enough for our purposes for some time.
 
 |   Class  |        Basic type      |   Example  |
 |----------|------------------------|------------|
@@ -50,12 +50,15 @@ fav_fruit = input("What is your favourite fruit? ")
 print("The user's favourite fruit is:", fav_fruit)
 ```
 
-**Task 5:** Write a script that asks the user to enter the height and base of a triangle, then calculates the area.
+**Task 5:** Write a script that asks the user to enter the height and base of a triangle, then calculates the area. You will likely run into a `TypeError`. To fix this, you need to explicitly *cast* the user input as the desired type; for example:
+```python
+base = float(input("Enter the base in centimetres: "))
+```
 
-**Task 6:** Write a script that calculates the surface areas of octohedrons with side lengths of 1 cm, 2 cm, 3 cm and 4 cm.
+**Task 6:** Write a script that calculates the surface areas of octohedra with side lengths of 1 cm, 2 cm, 3 cm and 4 cm.
 
 ## Functions
-Task 6 motivates the use of functions: sometimes you need to re-use code. A convenient way to do this is to define a function. For example:
+Task 6 motivates the use of functions: sometimes you need to re-use code. A convenient way to do this is to define a function. As an example, the code below calculates the surface area of a sphere using the formula $S = 4 \pi r^2$. We simply need to define the function `sphere_surface_area` once, then we can call it as many times as we want with different inputs.
 ```python
 import math
 
@@ -72,7 +75,7 @@ S = sphere_surface_area(R)
 print(f"The surface area of a sphere of radius {R} cm is {S} cm^2")
 ```
 
-**Task 7:** define a function that calculates the surface area of an octohedron. Calculate the surface area of octohedra with side lengths of 1 cm, 2 cm, 3 cm and 4 cm. You should obtain the same answers as in Task 6.
+**Task 7:** define a function that calculates the surface area of an octohedron. Calculate the surface area of octohedra with side lengths of 1 cm, 2 cm, 3 cm and 4 cm. You should obtain the same answers as in Task 6. We'll return to functions again in [Lesson 5](../lesson5).
 
 ## Loops
 In Task 7, you needed to call the function many times. A nice way to do this is with loops:
@@ -83,4 +86,4 @@ for radius in radii:
     print(f"The surface area of a sphere of radius {radius} cm is {surface_area} cm^2")
 ```
 
-**Task 8:** replace the repeat function calls in your answer to Task 7 with a loop, similar to the above example.
+**Task 8:** replace the repeat function calls in your answer to Task 7 with a loop, similar to the above example. We'll return to loops again in [Lesson 4](../lesson4).
