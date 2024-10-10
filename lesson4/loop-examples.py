@@ -12,3 +12,4 @@ print(f"Trying to guess the random number... (pst... the answer is {ans})")
 while ans != guess:
     print(f"Doh! I guessed: {guess}")
     guess = random.randint(0, 20)  # generate another random number
+print(f"Yay! I guessed {guess}")

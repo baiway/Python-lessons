@@ -15,7 +15,7 @@ print(f"Trying to guess the random number... (pst... the answer is {ans})")
 while ans != guess:
     print(f"Doh! I guessed: {guess}")
     guess = random.randint(0, 20)  # generate another random number
-print("Yay, I got it!")
+print(f"Yay! I guessed {guess}")
 ```
 
 The output is shown below.
@@ -25,32 +25,13 @@ I love pears!
 I love grapes!
 I love bananas!
 I love kiwis!
-Trying to guess the random number... (pst... the answer is 0)
-Doh! I guessed: 10
-Doh! I guessed: 4
-Doh! I guessed: 10
-Doh! I guessed: 20
-Doh! I guessed: 13
-Doh! I guessed: 1
-Doh! I guessed: 18
-Doh! I guessed: 17
-Doh! I guessed: 17
-Doh! I guessed: 20
-Doh! I guessed: 11
-Doh! I guessed: 16
-Doh! I guessed: 6
-Doh! I guessed: 2
-Doh! I guessed: 14
-Doh! I guessed: 6
-Doh! I guessed: 9
-Doh! I guessed: 8
-Doh! I guessed: 15
-Doh! I guessed: 16
-Doh! I guessed: 19
-Doh! I guessed: 9
-Doh! I guessed: 7
+Trying to guess the random number... (pst... the answer is 19)
 Doh! I guessed: 12
-Yay! I got it!
+Doh! I guessed: 4
+Doh! I guessed: 16
+Doh! I guessed: 4
+Doh! I guessed: 9
+Yay! I guessed 19
 ```
 
 - [ ] Design a few tasks for students to practice using loops. At least one
