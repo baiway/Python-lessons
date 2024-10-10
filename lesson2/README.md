@@ -12,7 +12,7 @@ We can use the assignment operator `=` to store values in variables. For example
 
 **Task 1:** Determine the area of a triangle with a base length of 6 cm and a height of 9 cm. Store the lengths as variables `base` and `height` then use the formula `area = 0.5 * base * height` to calculate the area. Print the result to the screen using `print(area)`.
 
-**Task 2:** The surface area $s$ of an octohedron with side length $a$ is $s = 2a^2 \sqrt{3}$. Use this formula to determine the surface area of an octohedron with side length 8 cm. *Hint: you can write powers (e.g. $7^2$ in Python using the `**` operator, e.g. `7**2`). You can also use the `math` library to do square roots, e.g. `math.sqrt(64)`.*
+**Task 2:** The surface area $s$ of an octohedron with side length $a$ is $s = 2a^2 \sqrt{3}$. Use this formula to determine the surface area of an octohedron with side length 8 cm. Hint: you can write powers (e.g. $7^2$) in Python using the `**` operator (e.g. `7**2`). You can also use the `math` library to do square roots (e.g. `math.sqrt(64)` calculates $\sqrt{64}$).
 
 ## Data types
 Some of the basic data types in Python at listed below. There are more types (for a complete list, click [here](https://docs.python.org/3/library/stdtypes.html)), and it's even possible to define your own, but these will be enough for our purposes for some time.
