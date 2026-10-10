@@ -86,7 +86,7 @@ INPUTS = {
     "09-files/solutions/task5_high_scores.py": "Bailey\n8000\n",
     "09-files/solutions/task6_file_stats.py": "poem.txt\n",
     # Lesson 11
-    "11-classes-and-objects/solutions/task7_higher_or_lower.py": "h\n" * 60,
+    "11-classes-and-objects/solutions/task9_higher_or_lower.py": "h\n" * 60,
     # Lesson 13
     "13-dictionaries-and-sets/solutions/task1_phone_book.py": "1\nAda\n0123\n2\nAda\n2\nTim\n3\nTim\n4\n9\n5\n",
     # Lesson 14
@@ -129,7 +129,8 @@ EXPECTED = {
     "07-strings/solutions/task8_run_length_encoding.py": "12W1B3W",
     "08-exceptions/solutions/task5_menu.py": "between 1 and 5",
     "08-exceptions/solutions/task7_bmi.py": "22.9",
-    "08-exceptions/solutions/task8_mean_of_valid.py": "5.35",
+    "08-exceptions/solutions/task9_fixed_scores.py": "Number of passes: 5",
+    "08-exceptions/solutions/task10_mean_of_valid.py": "5.35",
     "09-files/solutions/task1_line_numbers.py": "11: -- Christina Rossetti",
     "09-files/solutions/task2_read_films.py": "5. Arrival",
     "09-files/solutions/task4_read_scores.py": "Highest score: Alan (90)",
@@ -145,7 +146,9 @@ EXPECTED = {
     "11-classes-and-objects/solutions/task3_bank_account.py": "Ada's account: £120.50",
     "11-classes-and-objects/solutions/task4_students.py": "Alan has the highest mean score",
     "11-classes-and-objects/solutions/task6_cards.py": "47 cards left",
-    "11-classes-and-objects/solutions/task8_vector.py": "(4, 6)",
+    "11-classes-and-objects/solutions/task7_class_variables.py": "Alan's account: £288.75",
+    "11-classes-and-objects/solutions/task8_static_methods.py": "5 5 25 True",
+    "11-classes-and-objects/solutions/task10_vector.py": "(4, 6)",
     "12-inheritance-and-encapsulation/examples/bank_account.cpp": "Ada's balance is £157.5",
     "12-inheritance-and-encapsulation/solutions/task1_shapes.py": "A square with area 25.00",
     "12-inheritance-and-encapsulation/solutions/task2_employees.py": "Grace: £5,000.00 per month",
