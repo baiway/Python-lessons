@@ -34,7 +34,7 @@ You can run any of the programs with `python <script>.py` (or `python3 <script>.
 - [Lesson 15](lessons/15-type-hints-and-dataclasses): Type hints and dataclasses
 - [Lesson 16](lessons/16-recursion-stacks-and-queues): Recursion, stacks and queues
 - [Lesson 17](lessons/17-testing): Testing your code with `pytest`
-- Exam board notes: differences between exam boards' pseudocode and requirements (*not yet written*)
+- [Exam board notes](exam-board-notes): how each exam board assesses programming, and how their pseudocode compares with Python
 
 ## For teachers
 This repository is a [`uv`](https://docs.astral.sh/uv/) project. To check that all the examples and model solutions run correctly, use:
