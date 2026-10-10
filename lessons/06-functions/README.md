@@ -100,7 +100,7 @@ def sphere_surface_area(radius):
 ```
 
 > [!NOTE]
-> You may also see functions written like `def sphere_surface_area(radius: float) -> float:`. The `: float` and `-> float` parts are called _type hints_. They tell the reader (and VS Code) that `radius` should be a `float`, and that the function returns a `float`. Python itself ignores them when running your code. We'll learn more about them in [Lesson 14](../14-type-hints-and-dataclasses).
+> You may also see functions written like `def sphere_surface_area(radius: float) -> float:`. The `: float` and `-> float` parts are called _type hints_. They tell the reader (and VS Code) that `radius` should be a `float`, and that the function returns a `float`. Python itself ignores them when running your code. We'll learn more about them in [Lesson 15](../15-type-hints-and-dataclasses).
 
 **Task 5:** Write a function `get_int_in_range(prompt, low, high)` that keeps asking the user to enter a whole number (using `prompt` as the message) until they enter one between `low` and `high` (inclusive), then returns it. Use your function to ask the user for their age (between 0 and 120) and their favourite number (between 1 and 10). [Solution](solutions/task5_get_int_in_range.py)
 
