@@ -26,7 +26,7 @@ You can run any of the programs with `python <script>.py` (or `python3 <script>.
 - [Lesson 9](lessons/09-files): Reading and writing files
 - [Lesson 10](lessons/10-searching-and-sorting): Searching and sorting algorithms
 - [Lesson 11](lessons/11-classes-and-objects): Classes and objects
-- [Lesson 12](lessons/12-inheritance-and-encapsulation): Inheritance and encapsulation (including a comparison with C++)
+- [Lesson 12](lessons/12-inheritance-and-encapsulation): Inheritance and encapsulation (including C++ comparison)
 
 ### Extras
 - [Lesson 13](lessons/13-dictionaries-and-sets): Tuples, dictionaries, sets and comprehensions
