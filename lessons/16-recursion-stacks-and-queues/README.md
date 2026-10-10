@@ -100,4 +100,4 @@ You can find the stack and queue examples in [`examples/stacks_and_queues.py`](e
 **⭐ Task 10:** Many languages don't have anything like `deque`, and queues are instead built using a fixed-size array, called a _circular queue_. The array has a `front` index (where the next item will be dequeued from) and a `rear` index (where the next item will be enqueued), and both wrap around to the start of the array when they reach the end (hint: `%`!). Write a `CircularQueue` class that stores its items in a list of a fixed `capacity` (e.g. `[None] * capacity`), with methods `enqueue`, `dequeue`, `is_empty` and `is_full`. Test it by filling it up, emptying it partly, then filling it again, so that the indexes wrap around. [Solution](solutions/task10_circular_queue.py)
 
 ---
-[← Previous: Lesson 15](../15-type-hints-and-dataclasses) | [Contents](../../README.md)
+[← Previous: Lesson 15](../15-type-hints-and-dataclasses) | [Contents](../../README.md) | [Next: Lesson 17 →](../17-testing)
