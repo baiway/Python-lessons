@@ -1,0 +1,4 @@
+# Graphs created by running the examples and solutions. (The copies in
+# `images/` are the ones shown in the README.)
+examples/*.png
+solutions/*.png
