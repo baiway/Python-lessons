@@ -33,7 +33,7 @@ You can run any of the programs with `python <script>.py` (or `python3 <script>.
 - [Lesson 14](lessons/14-packages): Modules and third-party packages (`numpy` and `matplotlib`)
 - [Lesson 15](lessons/15-type-hints-and-dataclasses): Type hints and dataclasses
 - [Lesson 16](lessons/16-recursion-stacks-and-queues): Recursion, stacks and queues
-- Lesson 17: Testing your code with `pytest` (*not yet written*)
+- [Lesson 17](lessons/17-testing): Testing your code with `pytest`
 - Exam board notes: differences between exam boards' pseudocode and requirements (*not yet written*)
 
 ## For teachers
@@ -44,4 +44,4 @@ uv run --group scientific pytest
 
 The `scientific` dependency group contains `numpy` and `matplotlib`, which are only needed for [Lesson 14](lessons/14-packages). If you leave out `--group scientific`, the scripts that need them are skipped.
 
-Scripts that ask for user input are given simulated input, which is defined in [`tests/test_solutions.py`](tests/test_solutions.py). If you add a new interactive script, add some input for it there. Each script is run from a temporary copy of its own folder, so any files it creates don't end up in the repository. The C++ examples in [Lesson 12](lessons/12-inheritance-and-encapsulation) are compiled and run too, if `g++` is installed, and the type hints in [Lesson 15](lessons/15-type-hints-and-dataclasses) are checked with `mypy`.
+Scripts that ask for user input are given simulated input, which is defined in [`tests/test_solutions.py`](tests/test_solutions.py). If you add a new interactive script, add some input for it there. Each script is run from a temporary copy of its own folder, so any files it creates don't end up in the repository. The C++ examples in [Lesson 12](lessons/12-inheritance-and-encapsulation) are compiled and run too, if `g++` is installed, the type hints in [Lesson 15](lessons/15-type-hints-and-dataclasses) are checked with `mypy`, and the test files in [Lesson 17](lessons/17-testing) are run with `pytest`.
