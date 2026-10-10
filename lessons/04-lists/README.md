@@ -169,6 +169,13 @@ print(b)  # prints [1, 2, 3, 4]
 
 You can find this example in [`examples/copying_lists.py`](examples/copying_lists.py).
 
+## Static and dynamic data structures
+Earlier, I mentioned that many languages use _arrays_, which have a fixed size, rather than lists, which can grow and shrink. Computer scientists call these _static_ and _dynamic_ data structures:
+- A **static** data structure has a fixed size, which is decided when it's created. The computer sets aside one block of memory for it straight away, and it never changes. This makes static data structures simple and fast (the computer can work out exactly where each item is stored, so looking an item up by its index is very quick), but you have to know in advance how much space you'll need. If you guess too small, you run out of space; if you guess too big, you waste memory.
+- A **dynamic** data structure can change size while your program is running, so you don't need to know how big it will get in advance. The price you pay is a bit of extra work behind the scenes, and usually a bit of extra memory.
+
+Python lists are dynamic. Behind the scenes, a list is stored in a block of memory with some spare space at the end. When you `.append` an item, Python normally just puts it in the spare space, which is very quick. But when the spare space runs out, Python has to find a new, bigger block of memory and copy every item across to it, which takes longer. (Python makes the new block quite a bit bigger each time, so this doesn't happen very often.)
+
 **⭐ Task 8:** Write a lottery program. The computer should pick 6 _different_ random numbers between 1 and 59 (don't use `random.sample` -- use a `while` loop and `in` to avoid picking the same number twice). The user should then enter 6 numbers. Print the computer's numbers (sorted), the user's numbers, and how many numbers the user matched. [Solution](solutions/task8_lottery.py)
 
 **⭐ Task 9:** Write a program that finds the _second_ largest number in a list without sorting it and without using `max`. Can you do it by looping over the list only once? Make sure it works for lists like `[5, 5, 3]` (where the answer should be `3`). [Solution](solutions/task9_second_largest.py)

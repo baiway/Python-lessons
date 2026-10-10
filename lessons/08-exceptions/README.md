@@ -1,11 +1,11 @@
 # Lesson 8: Errors and exceptions
-By now, you'll have seen plenty of error messages! In this lesson, we'll learn how to read them, and how to write programs that deal with errors gracefully instead of crashing.
+By now, you'll have seen plenty of error messages! In this lesson, we'll learn how to read them, how to write programs that deal with errors gracefully instead of crashing, and how to track down bugs that don't cause any error messages at all.
 
 ## Types of error
 There are three main types of error you'll come across:
 1. **Syntax errors** happen when your code isn't valid Python, e.g. if you forget a colon, a bracket or a quotation mark. Python spots these _before_ it starts running your program, so nothing runs at all.
 2. **Runtime errors** happen while your program is running, when Python is asked to do something impossible, like dividing by zero or converting `"banana"` to an `int`. In Python, these are called _exceptions_. Unless you handle them, they crash your program.
-3. **Logic errors** happen when your program runs without crashing, but does the wrong thing, e.g. if you type `+` when you meant `-`. Python can't spot these for you. These are usually the hardest errors to find!
+3. **Logic errors** happen when your program runs without crashing, but does the wrong thing, e.g. if you type `+` when you meant `-`. Python can't spot these for you. These are usually the hardest errors to find! We'll look at some ways of finding them [at the end of this lesson](#debugging-finding-logic-errors).
 
 In this lesson, we're interested in the second type: exceptions.
 
@@ -138,12 +138,69 @@ def calculate_area(width, height):
 
 **Task 7:** Write a function `calculate_bmi(mass, height)` that calculates a person's body mass index using the formula $\text{BMI} = \frac{\text{mass}}{\text{height}^2}$, where mass is in kilograms and height is in metres. Your function should raise a `ValueError` with a helpful message if either input is zero or negative. Write a program that asks the user for their mass and height, and uses `try`/`except` to print either their BMI (to 1 decimal place) or the error message. [Solution](solutions/task7_bmi.py)
 
-**⭐ Task 8:** The list below contains some data that was typed in by hand, and some of it is invalid. Write a function `mean_of_valid(entries)` that converts each entry to a `float`, skips any that can't be converted, and returns the mean of the valid ones _and_ the number that were skipped. What should your function do if _none_ of the entries are valid? [Solution](solutions/task8_mean_of_valid.py)
+## Debugging: finding logic errors
+Exceptions are annoying, but at least Python tells you that something has gone wrong, and where. Logic errors are harder: your program runs perfectly happily, but gives the wrong answer. Tracking down and fixing errors like these is called _debugging_. There are several techniques that can help.
+
+### Print statements
+The simplest technique is to add some extra `print` statements, to show you the values of your variables as your program runs. The `=` trick from [Lesson 7](../07-strings) is perfect for this: `print(f"{i=}, {total=}")` prints something like `i=2, total=6`. Remember to remove these when you've found the problem!
+
+### Trace tables
+A _trace table_ is a way of working through a program by hand, line by line, writing down the value of each variable every time it changes. Each column is a variable (or a condition, or the output), and you add a new row whenever something changes. They're a great way of understanding what a piece of code does, and you'll be asked to complete them in exams. For example, here's a trace table for the program below:
+```python
+total = 0
+for i in range(1, 4):
+    total = total + i * 2
+print(total)
+```
+
+| `i` | `total` | Output |
+|-----|---------|--------|
+|     | 0       |        |
+| 1   | 2       |        |
+| 2   | 6       |        |
+| 3   | 12      |        |
+|     |         | 12     |
+
+### Using a debugger
+VS Code (and Thonny) have a built-in _debugger_, which lets you pause your program at any line, look at the values of all your variables, and then run your program one line at a time. It's like an automatic trace table!
+1. Click just to the left of a line number to set a _breakpoint_ (a red dot will appear). Your program will pause just _before_ it runs that line.
+2. Press `F5` (or click the arrow next to the "Run" button and choose "Python Debugger: Debug Python File"). Your program will run until it reaches the breakpoint.
+3. While the program is paused, the "Variables" panel on the left shows the current value of every variable. You can also hover your mouse over a variable in your code to see its value.
+4. Use the buttons in the toolbar at the top of the screen to carry on:
+    - **Step Over** (`F10`) runs the current line, then pauses again on the next line.
+    - **Step Into** (`F11`) is like Step Over, but if the current line calls one of your functions, it goes _into_ the function so that you can step through it too.
+    - **Continue** (`F5`) runs until the next breakpoint (or until the program finishes).
+    - **Stop** (`Shift` + `F5`) stops the program.
+
+(On a Mac, you may need to hold the `fn` key to use the `F` keys.) In Thonny, click the "Debug current script" button (the bug icon) instead of "Run", then use the "Step over" and "Step into" buttons.
+
+> [!TIP]
+> If you're really stuck, try explaining your code out loud, one line at a time, to someone else (or to a rubber duck!). This is called _rubber duck debugging_, and it works surprisingly often: you'll usually spot the problem halfway through explaining it.
+
+**Task 8:** Complete a trace table for the program below, with columns for `n`, `n % 2 == 0`, `steps` and the output. Then check your answer using the debugger. [Solution](solutions/task8_trace_table.md)
+```python
+n = 6
+steps = 0
+while n != 1:
+    if n % 2 == 0:
+        n = n // 2
+    else:
+        n = 3 * n + 1
+    steps = steps + 1
+print(steps)
+```
+
+**Task 9:** [`exercises/buggy_scores.py`](exercises/buggy_scores.py) is supposed to print the mean score, the number of passes (a score of 50 or more is a pass) and the highest score for the list of scores below. The correct answers are a mean of 60.83 (to 2 decimal places), 5 passes, and a highest score of 91. But the program contains three logic errors! Use print statements, a trace table and/or the debugger to find and fix them. [Solution](solutions/task9_fixed_scores.py)
+```python
+scores = [72, 50, 38, 91, 50, 64]
+```
+
+**⭐ Task 10:** The list below contains some data that was typed in by hand, and some of it is invalid. Write a function `mean_of_valid(entries)` that converts each entry to a `float`, skips any that can't be converted, and returns the mean of the valid ones _and_ the number that were skipped. What should your function do if _none_ of the entries are valid? [Solution](solutions/task10_mean_of_valid.py)
 ```python
 entries = ["12", "7.5", "banana", "3", "", "-4", "1O", "8.25"]
 ```
 
-**⭐ Task 9:** I said earlier that you should never write `except:` on its own. Run the program in [`examples/bare_except.py`](examples/bare_except.py) and try to stop it by pressing `Ctrl` + `c`. What happens, and why? How would you fix it? [Solution](solutions/task9_bare_except.md)
+**⭐ Task 11:** I said earlier that you should never write `except:` on its own. Run the program in [`examples/bare_except.py`](examples/bare_except.py) and try to stop it by pressing `Ctrl` + `c`. What happens, and why? How would you fix it? [Solution](solutions/task11_bare_except.md)
 
 ---
 [← Previous: Lesson 7](../07-strings) | [Contents](../../README.md) | [Next: Lesson 9 →](../09-files)
