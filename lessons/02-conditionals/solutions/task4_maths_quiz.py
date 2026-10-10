@@ -1,6 +1,6 @@
 import random
 
-# Get get limits from user
+# Get limits from user
 print("Please enter the lower and upper limit.")
 lower_lim = int(input("Lower limit: "))
 upper_lim = int(input("Upper limit: "))
