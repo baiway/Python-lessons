@@ -1,5 +1,5 @@
 # Lesson 12: Inheritance and encapsulation
-In [Lesson 11](../11-classes-and-objects), we learnt how to create our own classes. In this lesson, we'll look at two of the big ideas in object-oriented programming: _inheritance_, which lets us build new classes on top of existing ones, and _encapsulation_, which is about hiding the inner workings of a class from the code that uses it. Along the way, we'll take a short detour into another language, C++, to see how encapsulation works there, and why Python does things differently.
+In [Lesson 11](../11-classes-and-objects), we learnt how to create our own classes. In this lesson, we'll look at two of the big ideas in object-oriented programming: _inheritance_, which lets us build new classes on top of existing ones, and _encapsulation_, which is about hiding the inner workings of a class from the code that uses it. We'll finish by looking at _composition_ and _aggregation_, which let us build objects out of other objects. Along the way, we'll take a short detour into another language, C++, to see how encapsulation works there, and why Python does things differently.
 
 ## Inheritance
 Often, several classes have a lot in common. Dogs and cats are both animals: they both have a name, they can both eat and sleep, and they can both make a noise (although a different one). Rather than writing the same code in a `Dog` class and a `Cat` class, we can put the shared code in an `Animal` class, and have `Dog` and `Cat` _inherit_ from it:
@@ -34,7 +34,7 @@ class Cat(Animal):
 There are a few more things to notice:
 1. **Overriding:** both `Dog` and `Cat` define their own `speak` method, which replaces (or _overrides_) the one in `Animal`. When we call `rex.speak()`, Python looks for a `speak` method in `Dog` first. It only looks in `Animal` if it can't find one.
 2. **`super()`:** `Cat` needs an extra attribute, `indoor`, so it has its own `__init__`. But we still want `Animal.__init__` to set up the name. `super().__init__(name)` calls the parent class's version of `__init__`. You can use `super()` to call the parent's version of any method, not just `__init__`.
-3. **"Is a":** inheritance describes an "is a" relationship: a dog _is an_ animal. You can check this using `isinstance`: `isinstance(rex, Animal)` is `True`. If the relationship is "has a" (e.g. a car _has an_ engine), you should store an object as an attribute instead of using inheritance. This is called _composition_ (or _aggregation_).
+3. **"Is a":** inheritance describes an "is a" relationship: a dog _is an_ animal. You can check this using `isinstance`: `isinstance(rex, Animal)` is `True`. If the relationship is "has a" (e.g. a car _has an_ engine), you should store an object as an attribute instead of using inheritance. This is called _composition_ (or _aggregation_), and we'll look at it properly [at the end of this lesson](#composition-and-aggregation).
 
 One of the most powerful things about inheritance is that we can treat objects of different classes in the same way, as long as they share a parent class. This is called _polymorphism_ (from the Greek for "many forms"):
 ```python
@@ -232,9 +232,93 @@ t.celsius = -300     # ValueError
 
 **Task 7:** Draw a class diagram for the C++ `BankAccount` and `SavingsAccount` classes in [`examples/bank_account.cpp`](examples/bank_account.cpp), showing the inheritance relationship and the access modifier of every attribute and method. [Solution](solutions/task7_class_diagram.md)
 
-**⭐ Task 8:** Write a C++ version of the `Rectangle` class from [Lesson 11](../11-classes-and-objects) Task 2. Its `width` and `height` should be private, with public getters and setters. The setters should refuse to set a width or height that isn't positive (in C++, you can do this by printing a message and returning early, as in `deposit`). Add public `area` and `perimeter` methods, and write a `main` function that tests your class. Use [`examples/bank_account.cpp`](examples/bank_account.cpp) as a guide to the syntax. [Solution](solutions/task8_rectangle.cpp)
+## Composition and aggregation
+Inheritance describes an "is a" relationship. But very often, the relationship between two classes is "has a": a car _has an_ engine, a football team _has_ players, a house _has_ rooms. We model these relationships by storing objects as attributes of other objects. There are two slightly different versions of this, depending on who _owns_ the smaller objects:
+- In **composition**, the smaller objects are part of the bigger object, and can't exist without it. They're usually created inside the bigger object's `__init__`, and nothing else has access to them. For example, a house has rooms: if you knock the house down, the rooms go too.
+- In **aggregation**, the smaller objects can exist independently of the bigger object. They're usually created elsewhere and passed in. For example, a football team has players, but if the team is disbanded, the players still exist (and can join another team). A player could even belong to more than one team at once, like a club team and a national team.
 
-**⭐ Task 9:** In Task 1, `Shape.area()` returns `0`, which doesn't really make sense: a generic "shape" doesn't have an area! It would be better if it wasn't possible to create a plain `Shape` at all, only specific shapes like `Circle` and `Rectangle`. A class like this is called an _abstract class_. Look up Python's [`abc` module](https://docs.python.org/3/library/abc.html), and use `ABC` and `@abstractmethod` to make `Shape` abstract. What happens when you try to create a `Shape`? What happens if you create a subclass that forgets to define `area`? [Solution](solutions/task9_abstract_shapes.py)
+```python
+class Room:
+    def __init__(self, name, area):
+        self.name = name
+        self.area = area
+
+
+class House:
+    def __init__(self, address, room_sizes):
+        self.address = address
+        # Composition: the house creates its own rooms, and they belong to it
+        self.rooms = []
+        for name, area in room_sizes:
+            self.rooms.append(Room(name, area))
+
+    def total_area(self):
+        return sum([room.area for room in self.rooms])
+
+
+class Player:
+    def __init__(self, name):
+        self.name = name
+
+
+class Team:
+    def __init__(self, name):
+        self.name = name
+        self.players = []
+
+    def add_player(self, player):
+        # Aggregation: the players were created elsewhere and are passed in
+        self.players.append(player)
+
+
+house = House("1 Python Lane", [("Kitchen", 12), ("Lounge", 20), ("Bedroom", 15)])
+print(house.total_area())  # prints 47
+
+ada = Player("Ada")
+alan = Player("Alan")
+club = Team("Bletchley Rovers")
+country = Team("England")
+for team in [club, country]:
+    team.add_player(ada)   # the same Player object can belong to both teams
+club.add_player(alan)
+```
+
+In Python, the code for composition and aggregation looks very similar: in both cases, one object stores a reference to another. The difference is in the design: who creates the smaller objects, who else can use them, and whether they still make sense once the bigger object has gone.
+
+On a class diagram, both are drawn as a line with a diamond at the "whole" end. Composition uses a filled (black) diamond, and aggregation uses a hollow (white) diamond. You can also label each end of the line with how many objects are involved (its _multiplicity_): here, a house has one or more rooms (`1..*`), and a team has any number of players (`*`).
+```mermaid
+classDiagram
+    House "1" *-- "1..*" Room : has
+    Team "*" o-- "*" Player : has
+    class House {
+        address
+        rooms
+        total_area()
+    }
+    class Room {
+        name
+        area
+    }
+    class Team {
+        name
+        players
+        add_player(player)
+    }
+    class Player {
+        name
+    }
+```
+
+You can find this example in [`examples/composition_and_aggregation.py`](examples/composition_and_aggregation.py).
+
+> [!TIP]
+> A common piece of advice in object-oriented design is to "favour composition over inheritance". Inheritance creates a very tight link between two classes (a change to the parent class affects every child class), so if you can model something using "has a" instead of "is a", that's often the more flexible choice.
+
+**Task 8:** Write a `Car` class that is _composed_ of an `Engine` (with a `horsepower` attribute) and four `Wheel` objects (each with a `size` in inches), which the car creates itself in its `__init__`. Then write a `Garage` class that _aggregates_ cars: it should have methods to `park(car)` and `remove(car)`, and a method that prints every car in the garage. Create a few cars, park them, and move one car from one garage to another. Finally, draw a class diagram showing all four classes, with the correct diamonds. [Solution (code)](solutions/task8_car_and_garage.py) | [Solution (diagram)](solutions/task8_class_diagram.md)
+
+**⭐ Task 9:** Write a C++ version of the `Rectangle` class from [Lesson 11](../11-classes-and-objects) Task 2. Its `width` and `height` should be private, with public getters and setters. The setters should refuse to set a width or height that isn't positive (in C++, you can do this by printing a message and returning early, as in `deposit`). Add public `area` and `perimeter` methods, and write a `main` function that tests your class. Use [`examples/bank_account.cpp`](examples/bank_account.cpp) as a guide to the syntax. [Solution](solutions/task9_rectangle.cpp)
+
+**⭐ Task 10:** In Task 1, `Shape.area()` returns `0`, which doesn't really make sense: a generic "shape" doesn't have an area! It would be better if it wasn't possible to create a plain `Shape` at all, only specific shapes like `Circle` and `Rectangle`. A class like this is called an _abstract class_. Look up Python's [`abc` module](https://docs.python.org/3/library/abc.html), and use `ABC` and `@abstractmethod` to make `Shape` abstract. What happens when you try to create a `Shape`? What happens if you create a subclass that forgets to define `area`? [Solution](solutions/task10_abstract_shapes.py)
 
 ---
 [← Previous: Lesson 11](../11-classes-and-objects) | [Contents](../../README.md) | [Next: Lesson 13 →](../13-dictionaries-and-sets)
