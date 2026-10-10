@@ -255,11 +255,11 @@ def test_cpp_program_runs(program: str, tmp_path: Path) -> None:
         assert EXPECTED[program] in result.stdout
 
 
-def test_type_hints() -> None:
+def test_type_hints(tmp_path: Path) -> None:
     """Checks the type hints in the lesson on type hints using mypy"""
     lesson_dir = LESSONS_DIR / "15-type-hints-and-dataclasses"
     result = subprocess.run(
-        [sys.executable, "-m", "mypy", "--strict", "examples", "solutions"],
+        [sys.executable, "-m", "mypy", "--strict", "--cache-dir", str(tmp_path), "examples", "solutions"],
         cwd=lesson_dir,
         capture_output=True,
         text=True,
