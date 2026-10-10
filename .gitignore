@@ -1,0 +1,11 @@
+# Virtual environments (created by `uv`)
+.venv/
+
+# Python caches
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# macOS
+.DS_Store
