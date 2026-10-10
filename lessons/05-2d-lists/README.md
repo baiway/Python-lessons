@@ -127,14 +127,14 @@ b = [
 
 **⭐ Task 7:** To multiply two matrices $A$ and $B$, the item in row $i$ and column $j$ of the answer is found by multiplying each item in row $i$ of $A$ by the matching item in column $j$ of $B$, and adding them all up. For example:
 
-$$
+```math
 \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}
 \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix}
 =
 \begin{pmatrix} 1 \times 5 + 2 \times 7 & 1 \times 6 + 2 \times 8 \\ 3 \times 5 + 4 \times 7 & 3 \times 6 + 4 \times 8 \end{pmatrix}
 =
 \begin{pmatrix} 19 & 22 \\ 43 & 50 \end{pmatrix}
-$$
+```
 
 Write a program that multiplies two matrices. It should work for any sizes of matrices that can be multiplied (the number of columns in $A$ must equal the number of rows in $B$). Test it on the example above, then on a 2 × 3 matrix multiplied by a 3 × 2 matrix. [Solution](solutions/task7_matrix_multiplication.py)
 
