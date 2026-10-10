@@ -121,9 +121,53 @@ Different courses draw class diagrams in slightly different ways (e.g. some incl
 
 **Task 6:** Write a `Card` class representing a playing card, with a `rank` (e.g. `"A"`, `"7"` or `"K"`) and a `suit` (e.g. `"♠"`), and a `__str__` method that returns something like `7♠`. Then write a `Deck` class whose constructor creates a list of all 52 cards, with methods `shuffle()` (hint: look up `random.shuffle`), `deal()` (which removes the top card from the deck and returns it), and `__len__` (another dunder method, which Python calls when you use `len(deck)`). Deal yourself a hand of five cards, and print them along with how many cards are left in the deck. [Solution](solutions/task6_cards.py)
 
-**⭐ Task 7:** Use your `Card` and `Deck` classes to write a game of "higher or lower". Deal a card and show it to the player, then deal a second card. Before showing it, ask the player whether it will be higher or lower than the first. Keep going until the player gets one wrong, then tell them their score. Hint: add a `value()` method to `Card` that returns a number for each rank (A = 1, J = 11, Q = 12, K = 13). You can decide what happens when two cards have the same value! [Solution](solutions/task7_higher_or_lower.py)
+## Class variables and static methods
+All the attributes we've created so far have been _instance variables_: each object has its own copy, created in `__init__` using `self`. Rex and Fido each have their own `name` and `age`. Sometimes, though, we want a value that belongs to the _class itself_, and is shared by every object of that class. These are called _class variables_, and we create them inside the class, but outside any method:
+```python
+class Dog:
+    species = "Canis familiaris"  # a class variable, shared by all dogs
+    num_dogs = 0                  # another class variable
 
-**⭐ Task 8:** Python lets you choose what operators like `+` and `==` do for your own classes, using more dunder methods. Write a `Vector` class representing a 2D vector, with attributes `x` and `y`. Add: [Solution](solutions/task8_vector.py)
+    def __init__(self, name, age):
+        self.name = name          # instance variables: each dog has its own
+        self.age = age
+        Dog.num_dogs = Dog.num_dogs + 1
+
+
+rex = Dog("Rex", 3)
+fido = Dog("Fido", 7)
+print(Dog.num_dogs)   # prints 2
+print(rex.species)    # prints "Canis familiaris" (Python finds it on the class)
+```
+
+To change a class variable, always use the class's name (`Dog.num_dogs = ...`), not `self`. If you write `self.num_dogs = ...`, Python creates a new _instance_ variable with the same name, belonging only to that one object, and the class variable is left unchanged. This is a very common bug!
+
+Similarly, most methods are _instance methods_: they take `self` as their first parameter, and work with a particular object. A _static method_ belongs to the class rather than to any one object, so it doesn't take `self`. It's useful for helper functions that are related to the class, but don't need any particular object's data. We create one by putting `@staticmethod` above it (another _decorator_, like the ones we'll meet in [Lesson 12](../12-inheritance-and-encapsulation)):
+```python
+class Dog:
+    ...
+
+    @staticmethod
+    def human_years(dog_years):
+        """Converts a dog's age into (very roughly!) human years"""
+        return dog_years * 7
+
+
+print(Dog.human_years(3))  # prints 21. Notice that we didn't need a Dog object!
+```
+
+Python also has _class methods_ (`@classmethod`), which receive the class itself as their first parameter (usually called `cls`) instead of an object. They're most often used to provide extra ways of creating objects, e.g. `Dog.from_string("Rex,3")`. You can find all of these examples in [`examples/class_variables.py`](examples/class_variables.py).
+
+> [!NOTE]
+> In languages like Java and C++, class variables and static methods are both declared using the keyword `static`, so you'll often hear them called _static_ (or _non-instance_) members, and instance variables and methods called _non-static_ members. In UML class diagrams, static members are underlined. (In Mermaid, you write a `$` after a static member's name.)
+
+**Task 7:** Add a class variable `interest_rate` (set to `0.05`, i.e. 5%) and a class variable `num_accounts` to your `BankAccount` class from Task 3. `num_accounts` should count how many accounts have been created. Add an instance method `add_interest()`, which adds interest to an account's balance using the shared interest rate. Create a few accounts, add interest to each of them, then change the interest rate for _all_ accounts by changing the class variable, and add interest again. [Solution](solutions/task7_class_variables.py)
+
+**Task 8:** Add a static method `is_valid_length(value)` to your `Rectangle` class from Task 2, which returns `True` if `value` is a positive number. Use it in `__init__` to raise a `ValueError` if the width or height isn't valid. Then add a class method `square(cls, side)` that creates a square, so that `Rectangle.square(5)` does the same thing as `Rectangle(5, 5)`. Finally, draw a class diagram for your `Rectangle` class, showing which members are static. [Solution (code)](solutions/task8_static_methods.py) | [Solution (diagram)](solutions/task8_class_diagram.md)
+
+**⭐ Task 9:** Use your `Card` and `Deck` classes to write a game of "higher or lower". Deal a card and show it to the player, then deal a second card. Before showing it, ask the player whether it will be higher or lower than the first. Keep going until the player gets one wrong, then tell them their score. Hint: add a `value()` method to `Card` that returns a number for each rank (A = 1, J = 11, Q = 12, K = 13). You can decide what happens when two cards have the same value! [Solution](solutions/task9_higher_or_lower.py)
+
+**⭐ Task 10:** Python lets you choose what operators like `+` and `==` do for your own classes, using more dunder methods. Write a `Vector` class representing a 2D vector, with attributes `x` and `y`. Add: [Solution](solutions/task10_vector.py)
 - `__add__(self, other)`, which returns a new `Vector` that is the sum of `self` and `other`. Python calls this when you write `v1 + v2`.
 - `__eq__(self, other)`, which returns `True` if both vectors have the same `x` and `y`. Python calls this when you write `v1 == v2`. (Try comparing two vectors with `==` _before_ you write this method. What happens, and why?)
 - `__mul__(self, number)`, which multiplies the vector by a number (e.g. `v * 3`).
