@@ -42,7 +42,7 @@ These lessons go beyond GCSE, but are needed for IB Computer Science (HL) and A 
 - [Lesson 20](lessons/20-hash-tables-and-sets): Hash tables and sets
 
 ### Exam board notes
-- [Exam board notes](exam-board-notes): how each exam board assesses programming, and how their pseudocode compares with Python
+- [Exam board notes](exam-board-notes): how each GCSE, A Level and IB course assesses programming, how each board's pseudocode compares with Python, and which lessons cover each specification
 
 ## For teachers
 This repository is a [`uv`](https://docs.astral.sh/uv/) project. To check that all the examples and model solutions run correctly, use:
