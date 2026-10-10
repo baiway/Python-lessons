@@ -9,6 +9,9 @@ scripts can read data files stored alongside them, and any files they write
 don't end up in the repository. C++ examples and solutions are compiled and
 run too, if a C++ compiler is available.
 
+Test files written for the lesson on testing (`test_*.py`) are also run with
+pytest, to check that they pass (or, in one case, fail on purpose).
+
 Scripts that use `numpy` or `matplotlib` are skipped unless the `scientific`
 dependency group is installed. To include them, run
 `uv run --group scientific pytest`.
@@ -171,6 +174,11 @@ EXPECTED = {
     "16-recursion-stacks-and-queues/solutions/task10_circular_queue.py": "['E', 'F', 'C', 'D'] (front=2, rear=2)",
 }
 
+# Lesson test files that are meant to fail, because they find a bug
+EXPECTED_TEST_FAILURES = {
+    "17-testing/examples/test_leap_year.py",
+}
+
 # Scripts that are meant to end with an exception, and the exception they raise
 EXPECTED_ERRORS = {
     "12-inheritance-and-encapsulation/examples/name_mangling.py": "AttributeError",
@@ -265,3 +273,29 @@ def test_type_hints(tmp_path: Path) -> None:
         text=True,
     )
     assert result.returncode == 0, result.stdout
+
+
+def find_lesson_tests() -> list[str]:
+    """Finds the `test_*.py` files in the lessons, relative to `LESSONS_DIR`"""
+    tests = [
+        *LESSONS_DIR.glob("*/examples/test_*.py"),
+        *LESSONS_DIR.glob("*/solutions/test_*.py"),
+    ]
+    return sorted(path.relative_to(LESSONS_DIR).as_posix() for path in tests)
+
+
+@pytest.mark.parametrize("test_file", find_lesson_tests())
+def test_lesson_tests(test_file: str, tmp_path: Path) -> None:
+    run_dir = tmp_path / "run"
+    shutil.copytree((LESSONS_DIR / test_file).parent, run_dir)
+
+    result = subprocess.run(
+        [sys.executable, "-m", "pytest", "-p", "no:cacheprovider", Path(test_file).name],
+        cwd=run_dir,
+        capture_output=True,
+        text=True,
+    )
+    if test_file in EXPECTED_TEST_FAILURES:
+        assert result.returncode == 1, result.stdout  # 1 means "some tests failed"
+    else:
+        assert result.returncode == 0, result.stdout
