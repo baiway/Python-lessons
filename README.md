@@ -18,11 +18,11 @@ You can run any of the programs with `python <script>.py` (or `python3 <script>.
 - [Lesson 1](lessons/01-variables-and-types): Variables, data types, arithmetic, f-strings and user input
 - [Lesson 2](lessons/02-conditionals): Conditional logic (`if`, `elif` and `else`)
 - [Lesson 3](lessons/03-loops): `for` loops and `while` loops
-- Lesson 4: Lists (*not yet written*)
-- Lesson 5: 2D lists (*not yet written*)
-- Lesson 6: Functions (*not yet written*)
-- Lesson 7: Strings and string formatting (*not yet written*)
-- Lesson 8: Errors and exceptions (`try`, `except`, `else` and `finally`) (*not yet written*)
+- [Lesson 4](lessons/04-lists): Lists
+- [Lesson 5](lessons/05-2d-lists): 2D lists
+- [Lesson 6](lessons/06-functions): Functions
+- [Lesson 7](lessons/07-strings): Strings and string formatting
+- [Lesson 8](lessons/08-exceptions): Errors and exceptions (`try`, `except`, `else` and `finally`)
 - Lesson 9: Reading and writing files (*not yet written*)
 - Lesson 10: Searching and sorting algorithms (*not yet written*)
 - Lesson 11: Classes and objects (*not yet written*)

@@ -31,7 +31,7 @@ The conditions above use _comparison operators_. These compare two values and gi
 | `<=`     | Less than or equal to    | `4 <= 3` | `False` |
 
 > [!WARNING]
-> Be careful not to mix up `=` and `==`! A single `=` _stores_ a value in a variable. A double `==` _compares_ two values.
+> Be careful not to mix up `=` and `==`. A single `=` _stores_ a value in a variable. A double `==` _compares_ two values.
 
 You don't have to use comparison operators though; you can use any statement that evaluates to either `True` or `False`. For example, you can use the `in` keyword to check whether something appears in a list (we'll learn all about lists in [Lesson 4](../04-lists)):
 ```python
