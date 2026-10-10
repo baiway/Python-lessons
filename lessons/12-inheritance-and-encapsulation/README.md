@@ -237,4 +237,4 @@ t.celsius = -300     # ValueError
 **⭐ Task 9:** In Task 1, `Shape.area()` returns `0`, which doesn't really make sense: a generic "shape" doesn't have an area! It would be better if it wasn't possible to create a plain `Shape` at all, only specific shapes like `Circle` and `Rectangle`. A class like this is called an _abstract class_. Look up Python's [`abc` module](https://docs.python.org/3/library/abc.html), and use `ABC` and `@abstractmethod` to make `Shape` abstract. What happens when you try to create a `Shape`? What happens if you create a subclass that forgets to define `area`? [Solution](solutions/task9_abstract_shapes.py)
 
 ---
-[← Previous: Lesson 11](../11-classes-and-objects) | [Contents](../../README.md)
+[← Previous: Lesson 11](../11-classes-and-objects) | [Contents](../../README.md) | [Next: Lesson 13 →](../13-dictionaries-and-sets)
