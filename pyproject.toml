@@ -11,6 +11,10 @@ dev = [
     "pytest",
     "ruff",
 ]
+scientific = [
+    "matplotlib",
+    "numpy",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
