@@ -179,4 +179,4 @@ Then repeat, one small piece at a time. Writing the tests first forces you to th
 > This repository uses `pytest` to check that all of the examples and model solutions in these lessons work correctly. Have a look at [`tests/test_solutions.py`](../../tests/test_solutions.py) to see how it's done!
 
 ---
-[← Previous: Lesson 16](../16-recursion-stacks-and-queues) | [Contents](../../README.md)
+[← Previous: Lesson 16](../16-recursion-stacks-and-queues) | [Contents](../../README.md) | [Next: Lesson 18 →](../18-linked-lists)
