@@ -50,7 +50,7 @@ If you have to sit an on-screen exam, it's quite likely that you will not be giv
 2. Open your Downloads folder and double-click on the installer. It will be called something like `thonny-4.1.7.pkg` on macOS or `thonny-4.1.7.exe` on Windows.
 3. Follow the default installation options.
 
-You cannot customise Thonny in the same way you can customise VS Code, but everything we write in these lessons will run in Thonny too.
+You cannot customise Thonny in the same way you can customise VS Code, but everything we write in these lessons will run in Thonny too. (See the [exam board notes](../../exam-board-notes) for more about how each exam board assesses programming.)
 
 ## Optional: Installing `uv`
 [`uv`](https://docs.astral.sh/uv/) is a tool that manages Python versions and Python _packages_ (code that other people have written that you can download and use in your own programs). You don't need it for most of these lessons -- for the most part, we'll just run our code with `python` -- but we will use it later on when we start using third-party packages like `matplotlib`. It's also what professional Python developers increasingly use, so it's worth getting used to. To install it, run the following command in your terminal:
