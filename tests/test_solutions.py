@@ -8,7 +8,13 @@ Each script is run from a temporary copy of its own folder. This means that
 scripts can read data files stored alongside them, and any files they write
 don't end up in the repository. C++ examples and solutions are compiled and
 run too, if a C++ compiler is available.
+
+Scripts that use `numpy` or `matplotlib` are skipped unless the `scientific`
+dependency group is installed. To include them, run
+`uv run --group scientific pytest`.
 """
+import importlib.util
+import os
 import shutil
 import subprocess
 import sys
@@ -78,6 +84,10 @@ INPUTS = {
     "09-files/solutions/task6_file_stats.py": "poem.txt\n",
     # Lesson 11
     "11-classes-and-objects/solutions/task7_higher_or_lower.py": "h\n" * 60,
+    # Lesson 13
+    "13-dictionaries-and-sets/solutions/task1_phone_book.py": "1\nAda\n0123\n2\nAda\n2\nTim\n3\nTim\n4\n9\n5\n",
+    # Lesson 14
+    "14-packages/solutions/task2_birthday.py": "12\n25\n",
 }
 
 # Scripts that need another script to run first, e.g. to create a file they read
@@ -140,6 +150,25 @@ EXPECTED = {
     "12-inheritance-and-encapsulation/solutions/task6_temperature.py": "below absolute zero",
     "12-inheritance-and-encapsulation/solutions/task8_rectangle.cpp": "Height is still: 4",
     "12-inheritance-and-encapsulation/solutions/task9_abstract_shapes.py": "Can't instantiate abstract class Triangle",
+    "13-dictionaries-and-sets/solutions/task1_phone_book.py": "Sorry, Tim isn't in the phone book",
+    "13-dictionaries-and-sets/solutions/task2_word_frequency.py": "the: 6",
+    "13-dictionaries-and-sets/solutions/task3_scrabble.py": "python: 14",
+    "13-dictionaries-and-sets/solutions/task5_favourite_films.py": "Both like: ['Arrival', 'The Matrix', 'Up']",
+    "13-dictionaries-and-sets/solutions/task8_anagram_groups.py": "stone, tones, notes, onset",
+    "13-dictionaries-and-sets/solutions/task9_morse_code.py": "HELLO WORLD",
+    "15-type-hints-and-dataclasses/solutions/task3_student_dataclass.py": "Alan has the highest mean score",
+    "15-type-hints-and-dataclasses/solutions/task4_point.py": "cannot assign to field 'x'",
+    "15-type-hints-and-dataclasses/solutions/task5_shop.py": "Total stock value: £238.00",
+    "15-type-hints-and-dataclasses/solutions/task6_library.py": "is already on loan",
+    "14-packages/solutions/task1_use_shapes.py": "314.16",
+    "14-packages/solutions/task4_numpy_temperatures.py": "Days warmer than 20 °C: 4",
+    "16-recursion-stacks-and-queues/solutions/task1_factorial.py": "5000! has 16,326 digits",
+    "16-recursion-stacks-and-queues/solutions/task2_recursion_practice.py": "olleh",
+    "16-recursion-stacks-and-queues/solutions/task3_fibonacci.py": "That took 242,785 calls!",
+    "16-recursion-stacks-and-queues/solutions/task6_balanced_brackets.py": "'(a[b)]': False",
+    "16-recursion-stacks-and-queues/solutions/task8_memoised_fibonacci.py": "That took 49 calls",
+    "16-recursion-stacks-and-queues/solutions/task9_towers_of_hanoi.py": "5 discs took 31 moves",
+    "16-recursion-stacks-and-queues/solutions/task10_circular_queue.py": "['E', 'F', 'C', 'D'] (front=2, rear=2)",
 }
 
 # Scripts that are meant to end with an exception, and the exception they raise
@@ -164,6 +193,16 @@ def find_scripts(extension: str) -> list[str]:
     return sorted(path for path in relative_paths if path not in SKIP)
 
 
+def needs_missing_packages(script: str) -> bool:
+    """Checks whether a script uses `numpy` or `matplotlib` when they aren't
+    installed"""
+    source = (LESSONS_DIR / script).read_text(encoding="utf-8")
+    for package in ["numpy", "matplotlib"]:
+        if f"import {package}" in source and importlib.util.find_spec(package) is None:
+            return True
+    return False
+
+
 def run_python(script: str, run_dir: Path) -> subprocess.CompletedProcess:
     """Runs a Python script from `run_dir`, giving it any input in `INPUTS`"""
     return subprocess.run(
@@ -173,12 +212,16 @@ def run_python(script: str, run_dir: Path) -> subprocess.CompletedProcess:
         capture_output=True,
         text=True,
         encoding="utf-8",
-        timeout=10,
+        timeout=30,
+        env={**os.environ, "MPLBACKEND": "Agg"},  # draw graphs without opening windows
     )
 
 
 @pytest.mark.parametrize("script", find_scripts(".py"))
 def test_script_runs(script: str, tmp_path: Path) -> None:
+    if needs_missing_packages(script):
+        pytest.skip("needs the `scientific` dependency group")
+
     run_dir = tmp_path / "run"
     shutil.copytree((LESSONS_DIR / script).parent, run_dir)
 
@@ -210,3 +253,15 @@ def test_cpp_program_runs(program: str, tmp_path: Path) -> None:
     assert result.returncode == 0, result.stderr
     if program in EXPECTED:
         assert EXPECTED[program] in result.stdout
+
+
+def test_type_hints() -> None:
+    """Checks the type hints in the lesson on type hints using mypy"""
+    lesson_dir = LESSONS_DIR / "15-type-hints-and-dataclasses"
+    result = subprocess.run(
+        [sys.executable, "-m", "mypy", "--strict", "examples", "solutions"],
+        cwd=lesson_dir,
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stdout
