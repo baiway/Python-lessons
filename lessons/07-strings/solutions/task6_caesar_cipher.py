@@ -1,0 +1,34 @@
+def shift_letter(letter, shift):
+    """Shifts a single letter `shift` places along the alphabet, wrapping
+    around from Z to A. Anything that isn't a letter is left unchanged."""
+    if letter.isupper():
+        start = ord("A")
+    elif letter.islower():
+        start = ord("a")
+    else:
+        return letter
+
+    # Convert to a position from 0 to 25, shift it, wrap around using %, then
+    # convert back to a character
+    position = ord(letter) - start
+    new_position = (position + shift) % 26
+    return chr(start + new_position)
+
+
+def caesar_encrypt(message, shift):
+    """Encrypts `message` using a Caesar cipher"""
+    encrypted = ""
+    for letter in message:
+        encrypted = encrypted + shift_letter(letter, shift)
+    return encrypted
+
+
+def caesar_decrypt(message, shift):
+    """Decrypts a message that was encrypted with a Caesar cipher"""
+    # Decrypting is just encrypting with the opposite shift!
+    return caesar_encrypt(message, -shift)
+
+
+secret = caesar_encrypt("Hello, World! Zebras are cool.", 3)
+print(secret)                     # Khoor, Zruog! Cheudv duh frro.
+print(caesar_decrypt(secret, 3))  # Hello, World! Zebras are cool.
