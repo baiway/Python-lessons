@@ -11,8 +11,9 @@ The lessons in this repository are deliberately independent of any exam board: e
 | AQA GCSE (8525)                 | Paper 1: 2 hours, 90 marks, 50% of the GCSE         | Written                                | Chosen when you're entered: C#, Python or VB.NET            |
 | OCR GCSE (J277)                 | Paper 2: 1 hour 30 minutes, 80 marks, 50%           | Written                                | OCR Exam Reference Language, or "a high-level language"     |
 | Pearson Edexcel GCSE (1CP2)     | Paper 2: 2 hours, 75 marks, 50%                     | On-screen, using an IDE                | Python 3                                                    |
+| Pearson Edexcel International GCSE (4CP0) | Paper 2: 3 hours, 80 marks, 50%           | Part written, part on-screen           | Python, C# or Java                                          |
 | Eduqas GCSE (Component 2)       | Component 2: 2 hours, 80 marks, 50%                 | On-screen, plus a word processor       | Python 3                                                    |
-| IB Diploma (first exams 2027)   | Paper 2: 1 hour 15 minutes (SL) or 2 hours (HL)     | Written                                | Python or Java (your school chooses)                        |
+| IB Diploma (first exams 2027)   | Paper 2: 1 hour 15 minutes and 50 marks (SL, 35%), or 2 hours and 80 marks (HL, 40%) | Written | Python or Java (your school chooses)          |
 
 ### Written exams (AQA, OCR and IB)
 In a written exam, you'll write code with a pen, without an IDE to spot your mistakes or auto-complete things for you. You'll also be asked to read and _trace_ code (work out what it does, step by step, often using a trace table). Some things to practise:
@@ -25,21 +26,45 @@ In a written exam, you'll write code with a pen, without an IDE to spot your mis
 In an on-screen exam, you'll write, run and test real Python 3 code on a computer, without access to the internet. Some things to bear in mind:
 - **Practise in the IDE you'll use in the exam.** It may well be IDLE (which comes with Python) or Thonny (see [Lesson 0](../lessons/00-getting-started)) rather than VS Code, so make sure you're comfortable with it, and know how to run your code and read error messages in it.
 - **Only the standard library is available.** Don't rely on third-party packages like `numpy` or `matplotlib` ([Lesson 14](../lessons/14-packages)). Eduqas says that "only the standard Python 3 download should be used with no additional libraries installed".
-- **Edexcel** gives you a _Programming Language Subset_ (PLS): a document listing the parts of Python that the exam can ask you to use, which you'll have on paper and on screen during the exam. Pearson won't set tasks that go beyond it, so get the latest version from Pearson's website and get to know it well.
+- **Edexcel GCSE** gives you a _Programming Language Subset_ (PLS): a document listing the parts of Python that the exam can ask you to use, which you'll have on paper and on screen during the exam. Pearson won't set tasks that go beyond it, so get the latest version from Pearson's website and get to know it well.
 - **Eduqas** releases a _scenario_ (a list of requirements) on 1 September of the year before the exam, which you'll work on in advance. In the exam itself, you're given a prototype Python program to use, evaluate and change, and you answer some questions in a word-processed document. The specification also mentions graphical user interfaces built using Python's built-in libraries (i.e. `tkinter`), which these lessons don't cover.
 
-### IB Computer Science
-The IB Computer Science course changed for students taking their exams from May 2027 onwards. From what IB has published, and from summaries of the new guide:
-- Paper 2 tests computational thinking and programming, and there are two versions of it: one for Python and one for Java. Your school chooses which language you study.
-- The IB-specific pseudocode used by the old course is no longer used.
-- Object-oriented programming ([Lesson 11](../lessons/11-classes-and-objects) and [Lesson 12](../lessons/12-inheritance-and-encapsulation)) is part of the core course for everyone.
-- HL students also study _abstract data types_, such as stacks and queues ([Lesson 16](../lessons/16-recursion-stacks-and-queues)), linked lists and binary search trees, along with recursion. (Linked lists and trees aren't covered in these lessons yet.)
-- The internal assessment (worth 30% at SL and 20% at HL) is a "computational solution": a program that you design, build and evaluate, with up to 2,000 words of documentation and a video showing it working.
+### Edexcel International GCSE
+The International GCSE is assessed differently to Edexcel's GCSE, even though the papers have the same names. Its Paper 2 is a 3-hour exam that mixes written questions (answered on the question paper) with task-based questions, which you complete on a computer. You can program in Python, C# or Java. Pearson has its own pseudocode for the International GCSE, and a pseudocode reference document is available during the exam, so make sure you're familiar with it (it's in an appendix of the specification).
 
-I wasn't able to check all of these points against the official IB subject guide, which isn't freely available, so treat this as a summary and check the details with your teacher.
+### IB Computer Science
+The IB Computer Science course changed for students taking their exams from May 2027 onwards. The details below are from the subject guide for the new course (with section numbers in brackets, so you can look them up).
+- **Exams:** Paper 1 covers the concepts of computer science (theme A), plus questions on a _case study_ that's published 12 months before the May exams. Paper 2 covers computational thinking and programming (theme B).
+- **Language:** there are two versions of Paper 2: one for students who have studied Python, and one for Java. Your school chooses which language you study. Exam questions that include code are written in that language. There's no IB-specific pseudocode, unlike the old course.
+- **Built-in functions:** the guide encourages you to use Python's built-in functions like `sort`, `pop`, `len`, `max` and `min` in your own work. But it also says that "certain questions in the examination will prohibit specific built-in functions", so make sure you can write things like a maximum, a search or a sort yourself (as in [Lesson 4](../lessons/04-lists) and [Lesson 10](../lessons/10-searching-and-sorting)).
+- **Algorithmic thinking:** one Paper 2 question focuses on algorithmic thinking "without the need to interpret or write code".
+- **Internal assessment:** a "computational solution" to a problem of your own choosing, which takes about 35 hours and is worth 30% at SL and 20% at HL. You submit up to 2,000 words of documentation (not counting code excerpts, comments or diagrams), and a video of up to five minutes demonstrating your program and how you tested it.
+
+The programming content in the guide (theme B) lines up with these lessons as follows.
+
+| Topic                                                                                   | Level     | Lessons                                                                 |
+|-----------------------------------------------------------------------------------------|-----------|-------------------------------------------------------------------------|
+| Variables, substrings, selection, loops, functions and scope (B2.1, B2.3)               | SL and HL | [1](../lessons/01-variables-and-types) to [7](../lessons/07-strings)    |
+| Exception handling, "along with the `finally` block" (B2.1.3)                           | SL and HL | [8](../lessons/08-exceptions)                                           |
+| Debugging, including trace tables and breakpoints (B2.1.4)                              | SL and HL | Partly: tracebacks in [8](../lessons/08-exceptions), tracing by hand in [10](../lessons/10-searching-and-sorting). Breakpoints aren't covered yet |
+| 1D and 2D lists; static vs dynamic data structures (B2.2.1, B2.2.2)                     | SL and HL | [4](../lessons/04-lists) and [5](../lessons/05-2d-lists) (static vs dynamic only briefly) |
+| Stacks and queues (B2.2.3, B2.2.4)                                                      | SL and HL | [16](../lessons/16-recursion-stacks-and-queues)                         |
+| Big O; linear and binary search; bubble and selection sort (B2.4.1 to B2.4.3)           | SL and HL | [10](../lessons/10-searching-and-sorting)                               |
+| File processing (B2.5)                                                                  | SL and HL | [9](../lessons/09-files)                                                |
+| Classes, objects, constructors, UML class diagrams (B3.1)                               | SL and HL | [11](../lessons/11-classes-and-objects)                                 |
+| Encapsulation, information hiding and access modifiers (B3.1.5)                         | SL and HL | The "Encapsulation" and "Properties" sections of [12](../lessons/12-inheritance-and-encapsulation) |
+| Static (class) vs non-static (instance) variables and methods (B3.1.3)                  | SL and HL | Not covered yet                                                         |
+| Recursion (B2.4.4, B2.4.5)                                                              | HL only   | [16](../lessons/16-recursion-stacks-and-queues)                         |
+| Inheritance, polymorphism, abstract classes (B3.2.1 to B3.2.3)                          | HL only   | [12](../lessons/12-inheritance-and-encapsulation)                       |
+| Composition and aggregation (B3.2.4)                                                    | HL only   | Only mentioned briefly in [12](../lessons/12-inheritance-and-encapsulation) |
+| Design patterns: singleton, factory, observer (B3.2.5)                                  | HL only   | Not covered yet                                                         |
+| Sets, and how hash tables work (`dict` and `set` in Python) (B4.1.5, B4.1.6)            | HL only   | [13](../lessons/13-dictionaries-and-sets) (but not how hash tables work) |
+| Linked lists (singly, doubly and circular) and binary search trees (B4.1.2 to B4.1.4)   | HL only   | Not covered yet                                                         |
+
+Note that stacks and queues are for everyone, not just HL students, even though they're in the same lesson as recursion.
 
 ## Pseudocode compared with Python
-AQA and OCR both present code in exam questions using their own pseudocode. You'll need to be able to read it, and translate between it and Python. (AQA says you don't have to write its pseudo-code yourself, as long as your answer is "clear, consistent and unambiguous". OCR accepts answers in its Exam Reference Language or in a high-level language like Python, depending on the question.)
+AQA and OCR both present code in exam questions using their own pseudocode. You'll need to be able to read it, and translate between it and Python. (AQA says you don't have to write its pseudo-code yourself, as long as your answer is "clear, consistent and unambiguous". OCR accepts answers in its Exam Reference Language or in a high-level language like Python, depending on the question.) Pearson also has its own pseudocode for the Edexcel International GCSE, which isn't covered on this page.
 
 ### The most common gotchas
 These are the differences that catch people out most often:
@@ -276,16 +301,16 @@ Both pseudocodes talk about _arrays_ rather than lists. As we saw in [Lesson 4](
 
 ## Which lessons do I need?
 Everyone should work through [Lessons 0 to 10](../README.md#fundamentals), which cover the programming skills that all of these courses have in common: variables, selection, loops, lists and 2D lists, functions, strings, validation and exceptions, files, and searching and sorting algorithms. After that:
-- **IB students:** classes and objects ([Lessons 11](../lessons/11-classes-and-objects) and [12](../lessons/12-inheritance-and-encapsulation)) are essential. HL students should also do [Lesson 16](../lessons/16-recursion-stacks-and-queues).
+- **IB students:** everyone needs classes and objects ([Lesson 11](../lessons/11-classes-and-objects)), encapsulation (the second half of [Lesson 12](../lessons/12-inheritance-and-encapsulation)), and stacks and queues ([Lesson 16](../lessons/16-recursion-stacks-and-queues)). HL students also need inheritance and polymorphism (the first half of Lesson 12), sets ([Lesson 13](../lessons/13-dictionaries-and-sets)) and recursion (Lesson 16). See the table in the [IB section](#ib-computer-science) for the details, including the topics these lessons don't cover yet.
 - **GCSE students:** the GCSE programming exams focus on the fundamentals, so Lessons 11 onwards are mostly extension material. They're well worth doing if you're thinking of taking Computer Science further, though! Dictionaries ([Lesson 13](../lessons/13-dictionaries-and-sets)) and testing ([Lesson 17](../lessons/17-testing)) are particularly useful for practical programming, and the ideas of normal, boundary and erroneous test data in Lesson 17 come up in GCSE exams.
 - **Eduqas students:** the Eduqas specification asks you to use "lists, tuples and dictionaries", so make sure you do [Lesson 13](../lessons/13-dictionaries-and-sets) too.
 
 ## Sources
 - AQA: [GCSE Computer Science specification](https://www.aqa.org.uk/subjects/computer-science/gcse/computer-science-8525/specification) (8525), and [Notes and guidance: Pseudo-code](https://filestore.aqa.org.uk/resources/computing/AQA-8525-NG-PC.PDF) (2024).
 - OCR: [GCSE (9–1) Computer Science J277 specification](https://www.ocr.org.uk/qualifications/gcse/computer-science-j277-from-2020/), version 1, section 3c (OCR Exam Reference Language).
-- Pearson Edexcel: [GCSE (9–1) Computer Science assessment overview](https://qualifications.pearson.com/content/dam/pdf/GCSE/Computer%20Science/2020/teaching-and-learning-materials/pearson-edexcel-computer-science-assessment-overview.pdf).
+- Pearson Edexcel: [GCSE (9–1) Computer Science assessment overview](https://qualifications.pearson.com/content/dam/pdf/GCSE/Computer%20Science/2020/teaching-and-learning-materials/pearson-edexcel-computer-science-assessment-overview.pdf), and the [International GCSE Computer Science specification](https://qualifications.pearson.com/content/dam/pdf/International%20GCSE/computer-science/2017/specification-and-sample-assessments/international-gcse-in-Computer-Science-Specification.pdf) (4CP0, issue 1).
 - Eduqas: [GCSE Computer Science specification](https://www.eduqas.co.uk/qualifications/computer-science/) (teaching from 2020), sections 2.2 and 3.2.
-- IB: [Computer science subject brief](https://ibo.org/globalassets/new-structure/university-admission/pdfs/dp_comp_sci_subjectbrief_en.pdf), and summaries of the new guide (first assessment 2027), e.g. [AssessPrep](https://www.assessprep.com/blogs/ib-dp-computer-science-2027-changes).
+- IB: _Computer science guide_ (first assessment 2027), published 2024. This is available to IB schools through the IB's Programme Resource Centre, so ask your teacher if you'd like to see it.
 
 ---
 [Contents](../README.md)
