@@ -34,6 +34,14 @@ You can run any of the programs with `python <script>.py` (or `python3 <script>.
 - [Lesson 15](lessons/15-type-hints-and-dataclasses): Type hints and dataclasses
 - [Lesson 16](lessons/16-recursion-stacks-and-queues): Recursion, stacks and queues
 - [Lesson 17](lessons/17-testing): Testing your code with `pytest`
+
+### Abstract data types
+These lessons go beyond GCSE, but are needed for IB Computer Science (HL) and A Level Computer Science.
+- [Lesson 18](lessons/18-linked-lists): Linked lists (singly, doubly and circular)
+- [Lesson 19](lessons/19-binary-search-trees): Binary search trees
+- [Lesson 20](lessons/20-hash-tables-and-sets): Hash tables and sets
+
+### Exam board notes
 - [Exam board notes](exam-board-notes): how each exam board assesses programming, and how their pseudocode compares with Python
 
 ## For teachers
