@@ -10,7 +10,7 @@ Each lesson lives in its own folder inside [`lessons`](lessons) and contains:
 
 Tasks marked with a ⭐ are challenge tasks. These are a bit harder (or a bit longer) than the others. Have a go at them if you finish early or want to stretch yourself.
 
-You can run any of the programs with `python <script>.py` (or `python3 <script>.py` on macOS/Linux). From [Lesson 15](lessons/15-packages) onwards, we use third-party packages, and you'll need [`uv`](https://docs.astral.sh/uv/) to run some programs (see [Lesson 0](lessons/00-getting-started) for how to install it).
+You can run any of the programs with `python <script>.py` (or `python3 <script>.py` on macOS/Linux). Some programs in [Lesson 14](lessons/14-packages) use third-party packages (`numpy` and `matplotlib`), which you'll need to install first. That lesson explains how, using either `pip` or [`uv`](https://docs.astral.sh/uv/).
 
 ## Contents
 ### Fundamentals
@@ -29,17 +29,19 @@ You can run any of the programs with `python <script>.py` (or `python3 <script>.
 - [Lesson 12](lessons/12-inheritance-and-encapsulation): Inheritance and encapsulation (including a comparison with C++)
 
 ### Extras
-- Lesson 13: Dictionaries and sets (*not yet written*)
-- Lesson 14: Type hints and dataclasses (*not yet written*)
-- Lesson 15: Modules and third-party packages (`numpy` and `matplotlib`) (*not yet written*)
-- Lesson 16: Recursion, stacks and queues (*not yet written*)
+- [Lesson 13](lessons/13-dictionaries-and-sets): Tuples, dictionaries, sets and comprehensions
+- [Lesson 14](lessons/14-packages): Modules and third-party packages (`numpy` and `matplotlib`)
+- [Lesson 15](lessons/15-type-hints-and-dataclasses): Type hints and dataclasses
+- [Lesson 16](lessons/16-recursion-stacks-and-queues): Recursion, stacks and queues
 - Lesson 17: Testing your code with `pytest` (*not yet written*)
 - Exam board notes: differences between exam boards' pseudocode and requirements (*not yet written*)
 
 ## For teachers
 This repository is a [`uv`](https://docs.astral.sh/uv/) project. To check that all the examples and model solutions run correctly, use:
 ```sh
-uv run pytest
+uv run --group scientific pytest
 ```
 
-Scripts that ask for user input are given simulated input, which is defined in [`tests/test_solutions.py`](tests/test_solutions.py). If you add a new interactive script, add some input for it there. Each script is run from a temporary copy of its own folder, so any files it creates don't end up in the repository. The C++ examples in [Lesson 12](lessons/12-inheritance-and-encapsulation) are compiled and run too, if `g++` is installed.
+The `scientific` dependency group contains `numpy` and `matplotlib`, which are only needed for [Lesson 14](lessons/14-packages). If you leave out `--group scientific`, the scripts that need them are skipped.
+
+Scripts that ask for user input are given simulated input, which is defined in [`tests/test_solutions.py`](tests/test_solutions.py). If you add a new interactive script, add some input for it there. Each script is run from a temporary copy of its own folder, so any files it creates don't end up in the repository. The C++ examples in [Lesson 12](lessons/12-inheritance-and-encapsulation) are compiled and run too, if `g++` is installed, and the type hints in [Lesson 15](lessons/15-type-hints-and-dataclasses) are checked with `mypy`.
