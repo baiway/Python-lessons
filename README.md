@@ -23,10 +23,10 @@ You can run any of the programs with `python <script>.py` (or `python3 <script>.
 - [Lesson 6](lessons/06-functions): Functions
 - [Lesson 7](lessons/07-strings): Strings and string formatting
 - [Lesson 8](lessons/08-exceptions): Errors and exceptions (`try`, `except`, `else` and `finally`)
-- Lesson 9: Reading and writing files (*not yet written*)
-- Lesson 10: Searching and sorting algorithms (*not yet written*)
-- Lesson 11: Classes and objects (*not yet written*)
-- Lesson 12: Inheritance and encapsulation (including a comparison with C++) (*not yet written*)
+- [Lesson 9](lessons/09-files): Reading and writing files
+- [Lesson 10](lessons/10-searching-and-sorting): Searching and sorting algorithms
+- [Lesson 11](lessons/11-classes-and-objects): Classes and objects
+- [Lesson 12](lessons/12-inheritance-and-encapsulation): Inheritance and encapsulation (including a comparison with C++)
 
 ### Extras
 - Lesson 13: Dictionaries and sets (*not yet written*)
@@ -42,4 +42,4 @@ This repository is a [`uv`](https://docs.astral.sh/uv/) project. To check that a
 uv run pytest
 ```
 
-Scripts that ask for user input are given simulated input, which is defined in [`tests/test_solutions.py`](tests/test_solutions.py). If you add a new interactive script, add some input for it there.
+Scripts that ask for user input are given simulated input, which is defined in [`tests/test_solutions.py`](tests/test_solutions.py). If you add a new interactive script, add some input for it there. Each script is run from a temporary copy of its own folder, so any files it creates don't end up in the repository. The C++ examples in [Lesson 12](lessons/12-inheritance-and-encapsulation) are compiled and run too, if `g++` is installed.

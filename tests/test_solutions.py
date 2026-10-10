@@ -3,7 +3,13 @@
 Run with `uv run pytest`. Scripts that ask for user input are given the
 input listed in `INPUTS`. Where a script has a known correct answer, we also
 check that it appears in the output (see `EXPECTED`).
+
+Each script is run from a temporary copy of its own folder. This means that
+scripts can read data files stored alongside them, and any files they write
+don't end up in the repository. C++ examples and solutions are compiled and
+run too, if a C++ compiler is available.
 """
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -15,6 +21,8 @@ LESSONS_DIR = Path(__file__).parent.parent / "lessons"
 # Rows and columns for noughts and crosses games (one number per line)
 NOUGHTS_AND_CROSSES_WIN = "0\n0\n1\n0\n0\n0\n0\n1\n1\n1\n0\n2\n"
 NOUGHTS_AND_CROSSES_DRAW = "0\n0\n0\n1\n0\n2\n1\n1\n1\n0\n1\n2\n2\n1\n2\n0\n2\n2\n"
+
+FILMS = "Spirited Away\nPaddington 2\nThe Matrix\nUp\nArrival\n"
 
 # Simulated user input for interactive scripts (one line per `input` call)
 INPUTS = {
@@ -63,6 +71,19 @@ INPUTS = {
     "08-exceptions/solutions/task4_guess_the_number.py": "x\n200\n" + "".join(f"{i}\n" for i in range(1, 101)),
     "08-exceptions/solutions/task5_menu.py": "0\n",
     "08-exceptions/solutions/task7_bmi.py": "70\n1.75\n",
+    # Lesson 9
+    "09-files/solutions/task2_write_films.py": FILMS,
+    "09-files/solutions/task3_diary.py": "Not bad\n",
+    "09-files/solutions/task5_high_scores.py": "Bailey\n8000\n",
+    "09-files/solutions/task6_file_stats.py": "poem.txt\n",
+    # Lesson 11
+    "11-classes-and-objects/solutions/task7_higher_or_lower.py": "h\n" * 60,
+}
+
+# Scripts that need another script to run first, e.g. to create a file they read
+RUN_FIRST = {
+    "09-files/solutions/task2_read_films.py": "09-files/solutions/task2_write_films.py",
+    "09-files/solutions/task8_decrypt_file.py": "09-files/solutions/task8_encrypt_file.py",
 }
 
 # Text that must appear in the output of scripts with a known answer
@@ -96,6 +117,34 @@ EXPECTED = {
     "08-exceptions/solutions/task5_menu.py": "between 1 and 5",
     "08-exceptions/solutions/task7_bmi.py": "22.9",
     "08-exceptions/solutions/task8_mean_of_valid.py": "5.35",
+    "09-files/solutions/task1_line_numbers.py": "11: -- Christina Rossetti",
+    "09-files/solutions/task2_read_films.py": "5. Arrival",
+    "09-files/solutions/task4_read_scores.py": "Highest score: Alan (90)",
+    "09-files/solutions/task5_high_scores.py": "3. Bailey",
+    "09-files/solutions/task6_file_stats.py": "11 lines, 45 words and 238 characters",
+    "09-files/solutions/task7_weather.py": "Hottest day: 2026-07-11 (29.1 °C)",
+    "09-files/solutions/task8_decrypt_file.py": "Meet me by the old oak tree at midnight.",
+    "09-files/solutions/task9_csv_module.py": "Turing, Alan's favourite food is fish, chips and mushy peas",
+    "10-searching-and-sorting/solutions/task2_binary_search.py": "Binary search: 19 comparisons",
+    "10-searching-and-sorting/solutions/task4_bubble_sort.py": "After pass 4: [1, 2, 4, 6, 9]",
+    "10-searching-and-sorting/solutions/task7_merge.py": "[1, 2, 3, 4, 6, 7, 8, 9]",
+    "10-searching-and-sorting/solutions/task9_merge_sort.py": "[1, 2, 3, 4, 6, 7, 8, 9]",
+    "11-classes-and-objects/solutions/task3_bank_account.py": "Ada's account: £120.50",
+    "11-classes-and-objects/solutions/task4_students.py": "Alan has the highest mean score",
+    "11-classes-and-objects/solutions/task6_cards.py": "47 cards left",
+    "11-classes-and-objects/solutions/task8_vector.py": "(4, 6)",
+    "12-inheritance-and-encapsulation/examples/bank_account.cpp": "Ada's balance is £157.5",
+    "12-inheritance-and-encapsulation/solutions/task1_shapes.py": "A square with area 25.00",
+    "12-inheritance-and-encapsulation/solutions/task2_employees.py": "Grace: £5,000.00 per month",
+    "12-inheritance-and-encapsulation/solutions/task5_bank_account.py": "has no setter",
+    "12-inheritance-and-encapsulation/solutions/task6_temperature.py": "below absolute zero",
+    "12-inheritance-and-encapsulation/solutions/task8_rectangle.cpp": "Height is still: 4",
+    "12-inheritance-and-encapsulation/solutions/task9_abstract_shapes.py": "Can't instantiate abstract class Triangle",
+}
+
+# Scripts that are meant to end with an exception, and the exception they raise
+EXPECTED_ERRORS = {
+    "12-inheritance-and-encapsulation/examples/name_mangling.py": "AttributeError",
 }
 
 # Scripts that can't be tested automatically
@@ -104,27 +153,60 @@ SKIP = {
 }
 
 
-def find_scripts() -> list[str]:
-    """Finds all examples and model solutions, relative to `LESSONS_DIR`"""
+def find_scripts(extension: str) -> list[str]:
+    """Finds all examples and model solutions with the given file extension,
+    relative to `LESSONS_DIR`"""
     scripts = [
-        *LESSONS_DIR.glob("*/examples/*.py"),
-        *LESSONS_DIR.glob("*/solutions/*.py"),
+        *LESSONS_DIR.glob(f"*/examples/*{extension}"),
+        *LESSONS_DIR.glob(f"*/solutions/*{extension}"),
     ]
     relative_paths = (path.relative_to(LESSONS_DIR).as_posix() for path in scripts)
     return sorted(path for path in relative_paths if path not in SKIP)
 
 
-@pytest.mark.parametrize("script", find_scripts())
-def test_script_runs(script: str) -> None:
-    result = subprocess.run(
-        [sys.executable, script],
-        cwd=LESSONS_DIR,
+def run_python(script: str, run_dir: Path) -> subprocess.CompletedProcess:
+    """Runs a Python script from `run_dir`, giving it any input in `INPUTS`"""
+    return subprocess.run(
+        [sys.executable, Path(script).name],
+        cwd=run_dir,
         input=INPUTS.get(script, ""),
         capture_output=True,
         text=True,
         encoding="utf-8",
         timeout=10,
     )
-    assert result.returncode == 0, result.stderr
+
+
+@pytest.mark.parametrize("script", find_scripts(".py"))
+def test_script_runs(script: str, tmp_path: Path) -> None:
+    run_dir = tmp_path / "run"
+    shutil.copytree((LESSONS_DIR / script).parent, run_dir)
+
+    if script in RUN_FIRST:
+        first = run_python(RUN_FIRST[script], run_dir)
+        assert first.returncode == 0, first.stderr
+
+    result = run_python(script, run_dir)
+    if script in EXPECTED_ERRORS:
+        assert EXPECTED_ERRORS[script] in result.stderr
+    else:
+        assert result.returncode == 0, result.stderr
     if script in EXPECTED:
         assert EXPECTED[script] in result.stdout
+
+
+@pytest.mark.skipif(shutil.which("g++") is None, reason="no C++ compiler found")
+@pytest.mark.parametrize("program", find_scripts(".cpp"))
+def test_cpp_program_runs(program: str, tmp_path: Path) -> None:
+    executable = tmp_path / "program"
+    compiled = subprocess.run(
+        ["g++", "-std=c++17", "-Wall", "-Werror", str(LESSONS_DIR / program), "-o", str(executable)],
+        capture_output=True,
+        text=True,
+    )
+    assert compiled.returncode == 0, compiled.stderr
+
+    result = subprocess.run([str(executable)], capture_output=True, text=True, timeout=10)
+    assert result.returncode == 0, result.stderr
+    if program in EXPECTED:
+        assert EXPECTED[program] in result.stdout
