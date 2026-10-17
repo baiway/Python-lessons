@@ -34,7 +34,7 @@ The number of rows is `len(grid)`, and the number of columns is the length of an
 1. The middle number (`5`).
 2. The four corners.
 3. The whole of the bottom row.
-4. The whole of the middle _column_. Hint: there is no shortcut for this -- you'll need to pick out one item from each row.
+4. The whole of the middle _column_. Hint: there is no shortcut for this — you'll need to pick out one item from each row.
 
 ## Looping over 2D lists
 To visit every item in a 2D list, we use _nested_ loops (which we first saw in [Lesson 3](../03-loops)): an outer loop that goes through each row, and an inner loop that goes through each item in that row.

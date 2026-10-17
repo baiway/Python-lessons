@@ -1,5 +1,5 @@
 # Lesson 4: Lists
-So far, each of our variables has stored a single value. Very often though, we want to store a whole collection of values -- a list of names, a set of test scores, the items in a shopping basket, etc. In Python, we can do this using a _list_.
+So far, each of our variables has stored a single value. Very often though, we want to store a whole collection of values — a list of names, a set of test scores, the items in a shopping basket, etc. In Python, we can do this using a _list_.
 
 ## Creating lists
 We create a list by putting values inside square brackets `[]`, separated by commas:
@@ -9,7 +9,7 @@ scores = [72, 85, 64, 90]
 empty = []
 ```
 
-Lists can contain any type of value (even other lists -- we'll see this in [Lesson 5](../05-2d-lists)!), and the values don't all have to be the same type, although they usually are. We can find out how many items are in a list using `len`:
+Lists can contain any type of value (even other lists — we'll see this in [Lesson 5](../05-2d-lists)!), and the values don't all have to be the same type, although they usually are. We can find out how many items are in a list using `len`:
 ```python
 >>> len(fruits)
 3
@@ -135,7 +135,7 @@ Python also has some built-in functions that work on lists of numbers: `sum`, `m
 temperatures = [18.2, 21.5, 19.8, 23.1, 25.4, 22.0, 17.6]
 ```
 
-**Task 4:** A _linear search_ looks through a list one item at a time until it finds what it's looking for. Write a program that asks the user for a name and searches the list below for it. If the name is in the list, print its index; otherwise, print a message saying it wasn't found. Don't use `in` or `.index` -- the point is to write the search yourself! [Solution](solutions/task4_linear_search.py)
+**Task 4:** A _linear search_ looks through a list one item at a time until it finds what it's looking for. Write a program that asks the user for a name and searches the list below for it. If the name is in the list, print its index; otherwise, print a message saying it wasn't found. Don't use `in` or `.index` — the point is to write the search yourself! [Solution](solutions/task4_linear_search.py)
 ```python
 names = ["Ada", "Alan", "Grace", "Tim", "Margaret", "Linus", "Guido"]
 ```
@@ -176,7 +176,7 @@ Earlier, I mentioned that many languages use _arrays_, which have a fixed size, 
 
 Python lists are dynamic. Behind the scenes, a list is stored in a block of memory with some spare space at the end. When you `.append` an item, Python normally just puts it in the spare space, which is very quick. But when the spare space runs out, Python has to find a new, bigger block of memory and copy every item across to it, which takes longer. (Python makes the new block quite a bit bigger each time, so this doesn't happen very often.) We'll meet another dynamic data structure, the _linked list_, in [Lesson 18](../18-linked-lists).
 
-**⭐ Task 8:** Write a lottery program. The computer should pick 6 _different_ random numbers between 1 and 59 (don't use `random.sample` -- use a `while` loop and `in` to avoid picking the same number twice). The user should then enter 6 numbers. Print the computer's numbers (sorted), the user's numbers, and how many numbers the user matched. [Solution](solutions/task8_lottery.py)
+**⭐ Task 8:** Write a lottery program. The computer should pick 6 _different_ random numbers between 1 and 59 (don't use `random.sample` — use a `while` loop and `in` to avoid picking the same number twice). The user should then enter 6 numbers. Print the computer's numbers (sorted), the user's numbers, and how many numbers the user matched. [Solution](solutions/task8_lottery.py)
 
 **⭐ Task 9:** Write a program that finds the _second_ largest number in a list without sorting it and without using `max`. Can you do it by looping over the list only once? Make sure it works for lists like `[5, 5, 3]` (where the answer should be `3`). [Solution](solutions/task9_second_largest.py)
 

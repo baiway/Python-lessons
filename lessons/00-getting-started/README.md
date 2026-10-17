@@ -53,7 +53,7 @@ If you have to sit an on-screen exam, it's quite likely that you will not be giv
 You cannot customise Thonny in the same way you can customise VS Code, but everything we write in these lessons will run in Thonny too. (See the [exam board notes](../../exam-board-notes) for more about how each exam board assesses programming.)
 
 ## Optional: Installing `uv`
-[`uv`](https://docs.astral.sh/uv/) is a tool that manages Python versions and Python _packages_ (code that other people have written that you can download and use in your own programs). You don't need it for most of these lessons -- for the most part, we'll just run our code with `python` -- but we will use it later on when we start using third-party packages like `matplotlib`. It's also what professional Python developers increasingly use, so it's worth getting used to. To install it, run the following command in your terminal:
+[`uv`](https://docs.astral.sh/uv/) is a tool that manages Python versions and Python _packages_ (code that other people have written that you can download and use in your own programs). You don't need it for most of these lessons — for the most part, we'll just run our code with `python` — but we will use it later on when we start using third-party packages like `matplotlib`. It's also what professional Python developers increasingly use, so it's worth getting used to. To install it, run the following command in your terminal:
 - **macOS / Linux:**
   ```sh
   curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -78,7 +78,7 @@ Now it's time to write our first Python program! Before we write any code, I rec
 
 **Windows:**
 1. Open the File Explorer (just search "file" in the start menu then press the `Enter` key).
-2. Scroll down on the left pane until you see "This PC". Click it, then double-click on "Local Disk (C:)". This is your "local" home storage -- files stored here are physically stored on your computer, rather than "in the cloud" through OneDrive. In general, it's always better to store and run your code locally so you don't run into synchronisation issues with cloud services.
+2. Scroll down on the left pane until you see "This PC". Click it, then double-click on "Local Disk (C:)". This is your "local" home storage — files stored here are physically stored on your computer, rather than "in the cloud" through OneDrive. In general, it's always better to store and run your code locally so you don't run into synchronisation issues with cloud services.
 3. From here, click on "Users" then your username (for me, this is "Bailey"). You should now see lots of folders like "Documents", "Downloads", etc.
 4. Create a new folder here by pressing the "New" button (top-left) then clicking "Folder". Alternatively, you can just press `Ctrl` + `Shift` + `n`. Give the folder a sensible name, such as `python-lessons`.
 

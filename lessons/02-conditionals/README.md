@@ -46,13 +46,13 @@ if name not in plastics:
 
 **Task 2:** Write a program that asks the user for a test score out of 100 and prints their grade using the boundaries below. [Solution](solutions/task2_grades.py)
 
-| Score    | Grade |
-|----------|-------|
-| 80 -- 100 | A    |
-| 70 -- 79  | B    |
-| 60 -- 69  | C    |
-| 50 -- 59  | D    |
-| 0 -- 49   | U    |
+| Score  | Grade |
+|--------|-------|
+| 80–100 |   A   |
+| 70–79  |   B   |
+| 60–69  |   C   |
+| 50–59  |   D   |
+| 0–49   |   U   |
 
 ## Combining conditions with `and`, `or` and `not`
 We can combine several conditions into one using the _logical operators_ `and`, `or` and `not`:
@@ -75,7 +75,7 @@ else:
 
 **Task 3:** A cinema charges £5 for children (under 12) and pensioners (65 or over), and £9 for everyone else. Write a program that asks the user for their age and prints the price of their ticket. Try to use `or` so that you only need one `if` and one `else`. [Solution](solutions/task3_cinema_tickets.py)
 
-**Task 4:** Write a simple Python program that generates two random numbers `num1` and `num2`, asks the user to do something with them (e.g. add them together, or multiply them -- you decide), then checks whether the user got the answer right. Use the starter code in [`exercises/maths_quiz.py`](exercises/maths_quiz.py) (shown below) to start you off -- you need to replace each `...` with some code. [Solution](solutions/task4_maths_quiz.py)
+**Task 4:** Write a simple Python program that generates two random numbers `num1` and `num2`, asks the user to do something with them (e.g. add them together, or multiply them — you decide), then checks whether the user got the answer right. Use the starter code in [`exercises/maths_quiz.py`](exercises/maths_quiz.py) (shown below) to start you off — you need to replace each `...` with some code. [Solution](solutions/task4_maths_quiz.py)
 ```python
 import random
 
@@ -108,7 +108,7 @@ computer_choice = random.choice(["rock", "paper", "scissors"])
 user_choice = input("Enter 'rock', 'paper', or 'scissors': ").lower()
 ```
 
-**⭐ Task 7:** Your solution to Task 6 probably has a lot of repeated code (mine certainly does!). Re-write it so that it only has _three_ `print` statements for the result: one for a draw, one for a user win and one for a computer win. Hint: there are only three ways the user can win -- can you combine them into one condition using `and` and `or`? [Solution](solutions/task7_rock_paper_scissors_short.py)
+**⭐ Task 7:** Your solution to Task 6 probably has a lot of repeated code (mine certainly does!). Re-write it so that it only has _three_ `print` statements for the result: one for a draw, one for a user win and one for a computer win. Hint: there are only three ways the user can win — can you combine them into one condition using `and` and `or`? [Solution](solutions/task7_rock_paper_scissors_short.py)
 
 ---
 [← Previous: Lesson 1](../01-variables-and-types) | [Contents](../../README.md) | [Next: Lesson 3 →](../03-loops)

@@ -92,7 +92,7 @@ while True:
 
 **Task 4:** Improve your `get_int_in_range(prompt, low, high)` function from [Lesson 6](../06-functions) Task 5 so that it also copes with input that isn't a whole number. Use it to make your "guess the number" game from [Lesson 3](../03-loops) Task 6 impossible to crash. [Solution](solutions/task4_guess_the_number.py)
 
-**Task 5:** Write a program that shows the user the menu below, numbered from 1, and asks them to choose an item by its number. Print the item they chose. Your program shouldn't crash if the user enters something that isn't a number, or a number that's too big. Make sure you test what happens if they enter `0` or a negative number -- you might be surprised! [Solution](solutions/task5_menu.py)
+**Task 5:** Write a program that shows the user the menu below, numbered from 1, and asks them to choose an item by its number. Print the item they chose. Your program shouldn't crash if the user enters something that isn't a number, or a number that's too big. Make sure you test what happens if they enter `0` or a negative number — you might be surprised! [Solution](solutions/task5_menu.py)
 ```python
 menu = ["Pizza", "Burger", "Pasta", "Salad", "Soup"]
 ```

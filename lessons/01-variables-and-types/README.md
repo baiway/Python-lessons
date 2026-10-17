@@ -20,7 +20,7 @@ Note that `=` in Python does _not_ mean "equals" in the maths sense. It means "s
 4
 ```
 
-Variable names can contain letters, numbers and underscores, but they can't start with a number and they can't contain spaces. By convention, we write Python variable names in `snake_case` (all lowercase, with underscores between words), e.g. `side_length` rather than `SideLength` or `sidelength`. Choose names that describe what the variable stores -- `area` is much better than `a`!
+Variable names can contain letters, numbers and underscores, but they can't start with a number and they can't contain spaces. By convention, we write Python variable names in `snake_case` (all lowercase, with underscores between words), e.g. `side_length` rather than `SideLength` or `sidelength`. Choose names that describe what the variable stores — `area` is much better than `a`!
 
 ## Arithmetic
 Python supports all the arithmetic operators you'd expect, plus a couple you might not have seen before.
