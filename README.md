@@ -8,7 +8,7 @@ Each lesson lives in its own folder inside [`lessons`](lessons) and contains:
 - `exercises/`: starter code for some of the tasks. Replace each `...` with your own code.
 - `solutions/`: my model solutions to every task. Try each task yourself before looking at these! There's usually more than one correct way to solve a problem, so don't worry if your solution looks a bit different to mine.
 
-Tasks marked with a ⭐ are challenge tasks. These are a bit harder (or a bit longer) than the others. Have a go at them if you finish early or want to stretch yourself.
+Tasks marked with a ⭐ are challenge tasks. These are a bit harder (or a bit longer) than the others. Have a go at them if you finish early or want to stretch yourself. Tasks marked with ⭐⭐ are even tougher.
 
 You can run any of the programs with `python <script>.py` (or `python3 <script>.py` on macOS/Linux). Some programs in [Lesson 14](lessons/14-packages) use third-party packages (`numpy` and `matplotlib`), which you'll need to install first. That lesson explains how, using either `pip` or [`uv`](https://docs.astral.sh/uv/).
 
