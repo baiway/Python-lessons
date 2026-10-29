@@ -110,26 +110,8 @@ user_choice = input("Enter 'rock', 'paper', or 'scissors': ").lower()
 
 **⭐ Task 7:** Your solution to Task 6 probably has a lot of repeated code (mine certainly does!). Re-write it so that it only has _three_ `print` statements for the result: one for a draw, one for a user win and one for a computer win. Hint: there are only three ways the user can win — can you combine them into one condition using `and` and `or`? [Solution](solutions/task7_rock_paper_scissors_short.py)
 
-**⭐⭐ Task 8:** Extend your solution to Task 7 so that it plays [rock, paper, scissors, lizard, Spock](https://www.youtube.com/watch?v=jnfz_9d9BUA) instead. The rules are shown in the diagram below, where an arrow from one choice to another means that the first choice beats the second (e.g. scissors cuts paper). You should still only need three `print` statements for the result. Hint: each choice beats exactly two of the others, so how many ways can the user win now? [Solution](solutions/task8_rock_paper_scissors_lizard_spock.py)
-```mermaid
-flowchart LR
-    rock([Rock])
-    paper([Paper])
-    scissors([Scissors])
-    lizard([Lizard])
-    spock([Spock])
-
-    scissors -- cuts --> paper
-    paper -- covers --> rock
-    rock -- crushes --> lizard
-    lizard -- poisons --> spock
-    spock -- smashes --> scissors
-    scissors -- decapitates --> lizard
-    lizard -- eats --> paper
-    paper -- disproves --> spock
-    spock -- vaporises --> rock
-    rock -- crushes --> scissors
-```
+**⭐⭐ Task 8:** Extend your solution to Task 7 so that it plays [rock, paper, scissors, lizard, Spock](https://www.youtube.com/watch?v=jnfz_9d9BUA) instead. The rules are shown in the diagram below. You should still only need three `print` statements for the result. Hint: each choice beats exactly two of the others, so how many ways can the user win now? [Solution](solutions/task8_rock_paper_scissors_lizard_spock.py)
+![Rock, paper, scissors, lizard, Spock rules](rock-paper-scissors-lizard-spock.png)
 
 ---
 [← Previous: Lesson 1](../01-variables-and-types) | [Contents](../../README.md) | [Next: Lesson 3 →](../03-loops)
