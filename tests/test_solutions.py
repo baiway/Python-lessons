@@ -49,6 +49,7 @@ INPUTS = {
     "02-conditionals/solutions/task5_leap_year.py": "1900\n",
     "02-conditionals/solutions/task6_rock_paper_scissors.py": "rock\n",
     "02-conditionals/solutions/task7_rock_paper_scissors_short.py": "rock\n",
+    "02-conditionals/solutions/task8_rock_paper_scissors_lizard_spock.py": "Spock\n",
     # Lesson 3
     "03-loops/solutions/task2_times_tables.py": "7\n",
     "03-loops/solutions/task3_sum_to_n.py": "4\n",
